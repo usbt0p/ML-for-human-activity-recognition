@@ -88,3 +88,30 @@ def custom_scorer(estimator, X, y, pca_n_components=None):
 ```
 
 - asi se imprimen [dos plots con eje x compartido](https://scikit-learn.org/1.5/auto_examples/compose/plot_digits_pipe.html#sphx-glr-auto-examples-compose-plot-digits-pipe-py)
+
+
+---
+
+
+Como los distintos algoritmos solo afectan al tiempo de ejecución y no a la optimalidad, los que haremos será:
+
+1. Encontrar los mejores hiperparámetros para el modelo con todas las dimensiones determinadas como relevantes por el PCA inicial (251). Aunque el valor inicial se encontró realizando PCA con una LinearSVC, puede ser un buen valor general para los demás algoritmos.
+
+2. Aplicar esos hiperparámetros a los 3 algoritmos.
+
+3. Hacer una búsqueda sobre los modelos para optimizar el parámetro `leaf_size`. Se cambiará la función objetivo para que minimice el tiempo de ejecución.
+
+4. Con los mejores valores de `leaf_size`, comparar los tiempos de ejecución de cada algoritmo.
+
+5. SI HAY TIEMPO, hacer una comparación de tiempo de ejecución por el número de hojas, o de tiempo de ejecución variando las dimensiones utilizadas.
+
+---
+
+https://scikit-learn.org/1.5/auto_examples/compose/plot_compare_reduction.html#sphx-glr-auto-examples-compose-plot-compare-reduction-py
+
+https://scikit-learn.org/stable/auto_examples/compose/plot_feature_union.html#sphx-glr-auto-examples-compose-plot-feature-union-py
+
+---
+
+
+[Scalable learning with polynomial kernel approximation](https://scikit-learn.org/1.5/auto_examples/kernel_approximation/plot_scalable_poly_kernels.html)
