@@ -32,3 +32,59 @@ DUDA: hay que hacer los tests todos al final o puedo ir haciéndolos sobre la ma
 
 
 ---
+
+### TODO:
+
+decidir la reducción de dimensionalidad a aplicar: PCA, NMF, etc. justificar por que
+
+1. Descripción del conjunto de datos utilizado en este enfoque: atributos considerados, instancias, etc.
+2. Preprocesamiento específico del enfoque.
+3. Parte experimental: claridad + numero de experimentos
+  - Deberán detallarse todos los datos relacionados con los
+experimentos a realizar: porcentajes para la división del conjunto de
+datos original, número de pliegues en validación cruzada…
+  - probada con diferentes hiperparámetros
+  - incluir los resultados de las métricas
+  seleccionadas y una discusión y comparación de los modelos
+  obtenidos.
+  - otro material que pueda
+apoyar las afirmaciones, como gráficos explicativos, matrices de
+confusión…
+
+### HACER HOY
+- experimento: reducir AUN mas la dimensionalidad en el entrenamiento
+- experimento:  hacer selección de atributos para optimizar a saco el tiempo d e entrenamiento, pero elegir en cuales
+
+### OPCIONAL
+- intentar cachear la pipeline y meter passthrough al modelo
+- cachear knn
+- PLOT: dimension final VS tiempo entrenamiento VS f1-score
+  problema: el tiempo solo se mide para todas las ieraciones
+- aproximar kernel polinomial
+- plotear algunos hypp como en [este chisme de scikit](https://scikit-learn.org/1.5/auto_examples/svm/plot_rbf_parameters.html#train-classifiers)
+- crear e implementar un metodo de random forest / ensemble que ejecute separando actividades en movimiento / estáticas o por sensores, o simplemente metiendo varios modelos distintos
+- [hacer una funcion de pérdida propia con sklearn.make_scorer](https://stackoverflow.com/questions/32401493/how-to-create-customize-your-own-scorer-function-in-scikit-learn)
+
+  [make your custom scoring object](https://scikit-learn.org/1.5/modules/model_evaluation.html#implementing-your-own-scoring-object)
+
+```
+def custom_scorer(estimator, X, y, pca_n_components=None):
+  """
+  Calcula un score personalizado que equilibra la reducción de dimensiones (penalizando más dimensiones)
+  y el F1-score obtenido por el modelo."""
+
+  # Predecir y calcular F1-score
+  y_pred = estimator.predict(X_reduced)
+  f1 = f1_score(y, y_pred, average='weighted')
+
+  # Penalizar con el número de dimensiones. Cuanto menor sea pca_n_components, mejor.
+  # Ajustar el peso de la penalización en función de la escala de F1-score.
+  penalty = pca_n_components / X.shape[1] if pca_n_components else 1  # Penalización como proporción de dimensiones
+
+  # Combinar ambas métricas: Maximizar f1 pero penalizar número de componentes
+  score = f1 - 0.1 * penalty  # Ponderación de la penalización
+
+  return score
+```
+
+- asi se imprimen [dos plots con eje x compartido](https://scikit-learn.org/1.5/auto_examples/compose/plot_digits_pipe.html#sphx-glr-auto-examples-compose-plot-digits-pipe-py)
