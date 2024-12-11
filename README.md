@@ -1,5 +1,9 @@
 # ML-for-human-activity-recognition
-Applying dataset data analysis, visualization, preprocessing, hyperparameter tuning and model evaluation to the HAR  by using SVM's, kNN and Decision trees.
+
+[Original dataset for HAR](https://www.kaggle.com/datasets/uciml/human-activity-recognition-with-smartphones/data)
+
+> Applying dataset data analysis, visualization, preprocessing, hyperparameter tuning and model evaluation to the HAR  by using SVM's, kNN and Decision trees.
+> Achieved 96% accuracy and f1-score, equal to the one obtained by the dataset creators.
 
 Este proyecto busca aplicar las técnicas de aprendizale automático supervisado aprendidas a lo largo del curso al dataset Human Activity Recognition database.
 
@@ -32,3 +36,14 @@ Para la evaluación del modelo se han presentado matrices de confusión que perm
     F1-score weighted: media harmónica de recall y precision calculada de forma independiente para cada clase, y luego se calcula la media ponderada.
 
     Indicada para situaciones con desbalandeo de clases. El balance de clases nunca es perfecto, y aunque en este dataset es bueno , se ha elegido esta métrica para comparar con los resultados de accuracy y ver si el desbalance presente afecta al rendimiento de los modelos.
+
+# Conclusiones
+
+Basándose en las métricas, el mejor modelo es SVM con kernel RBF, pero si tenemos en cuenta la complejidad y eficiencia en tiempo de entrenamiento es LinearSVC, ya que la diferencia entre el accuracy y f1-score de ambos es realmente pequeña.
+
+Finalmente, y como se mencionó en las conclusiones de las SVM's, se ha conseguido alcanzar la métrica dada por los creadores originales del dataset:
+96.30% de precisión, y 96.29% de f1-score.
+
+Se ha demostrado que las SVM's superan a los modelos basados en k-NN y en árboles de decisión en este dataset.
+
+También se ha realizado un proceso completo de análisis, preprocesado, entrenamiento, optimización, validación y evaluación de los modelos, y se han extraído conclusiones de cada una de estas fases.
